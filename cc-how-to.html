@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CC-How-to - Prompt Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: fixed linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .prompt-workflow {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .step-label {
+      font-weight: 800;
+      font-size: 0.8rem;
+      background: var(--accent-primary);
+      color: #020617;
+      padding: 5px 16px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 30px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 25px;
+      line-height: 1.7;
+      word-break: break-word;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    /* Custom Scrollbar */
+    .prompt-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .prompt-content::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    .prompt-content::-webkit-scrollbar-thumb {
+      background: var(--accent-primary);
+      border-radius: 4px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      flex-direction: column;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+      text-decoration: none;
+      border: none;
+    }
+
+    .copy-btn {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #020617;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 40px;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .step-card { padding: 25px; }
+      .prompt-content { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>CC-How-to</h1>
+    </header>
+
+    <div class="prompt-workflow">
+      
+      <!-- Prompt #1 Card -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-label">Follow-up Prompt #1</span>
+        </div>
+        <div class="prompt-content" id="p1">Answer the following prompt in Bengali (India).
+
+Rules:
+- Use only Bengali (India).
+- Always address the reader as "আপনি".
+- Never use "তুমি" or "তুই".
+- Use a natural Kolkata-style conversational tone.
+- Use natural, modern Bengali (India).
+- Avoid Bangladeshi vocabulary, spelling, and expressions.
+
+PROMPT
+
+Give me more content ideas that are genuinely how-to in nature.
+
+Do not simply create how-to-sounding titles. The underlying content idea itself must teach a specific action, process, method, sequence, technique, or practical procedure.
+
+For every idea, the description must make clear:
+- what the reader will do
+- how they will do it
+- what process, method, sequence, or technique they will use
+- what specific result the process helps them achieve
+
+Do not generate ideas that only explain what something is, why it matters, what mistakes people make, what people should know, or what principle they should understand without providing a teachable process for doing something.
+
+Create genuinely new ideas rather than converting, rewording, or repeating the ideas already generated.
+
+Generate only new ideas that are not already covered by the original 5 content ideas.</div>
+        
+        <div class="button-group">
+          <button class="btn copy-btn" onclick="copyText('p1', this)">
+            <span>Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Prompt #2 Card -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-label">Optimized Authority Content Creation Prompt</span>
+        </div>
+        <div class="prompt-content" id="p2">Answer the following prompt in Bengali (India).
+
+Rules:
+- Use only Bengali (India).
+- Always address the reader as "আপনি".
+- Never use "তুমি" or "তুই".
+- Use a natural Kolkata-style conversational tone.
+- Use natural, modern Bengali (India).
+- Avoid Bangladeshi vocabulary, spelling, and expressions.
+
+PROMPT
+
+Use the content idea title and description below as the exact strategic direction for this authority content.
+
+Preserve the title, core idea, intended audience, strategic meaning, and teaching direction exactly.
+
+Do not rename, merge, replace, broaden, narrow, summarize, or reinterpret the core idea.
+
+CONTENT IDEA TO CREATE:
+
+[Content Idea]
+
+
+NON-NEGOTIABLE LENGTH
+
+Write at least 1,000 words.
+
+Aim for approximately 1,000 to 1,200 words when that range serves the idea naturally. Never cut useful substance merely to stay inside a range.
+
+If the draft is under 1,000 words, add useful substance, examples, distinctions, implications, practical reasoning, execution details, or decision points rather than repetition or filler.
+
+Before responding, silently verify that the body contains at least 1,000 words. Revise until it meets the minimum.
+
+
+AUTHORITY CONTENT STANDARD
+
+This is not a generic blog post, textbook chapter, motivational essay, or recycled list of tips.
+
+Write it as premium authority teaching that can naturally stand alone as a substantial social post, newsletter, article, membership lesson, masterclass segment, workshop teaching, PDF section, or spoken teaching with little or no rewriting.
+
+The reader should finish feeling that:
+
+- they learned one useful idea they had not fully seen before
+- they understand the mechanism behind it
+- they know how to use it when relevant
+- they gained a reusable way to think about the problem
+- the person teaching it has a clear, valuable way of thinking
+
+Make the practical payoff unmistakable throughout the content.
+
+Regularly connect the idea to what the reader can understand faster, decide better, avoid, simplify, improve, notice sooner, protect, gain, or do more effectively because they understand the idea.
+
+Keep every benefit grounded in the actual content idea.
+
+Never force hype, exaggerated promises, or empty benefit language.
+
+The goal is not merely to explain the idea clearly.
+
+The goal is to make the reader think:
+
+"I can see this differently now, and I know what to do with that understanding."
+
+
+TEACH ONE THING DEEPLY
+
+Stay centered on the exact content idea.
+
+Teach one core idea deeply rather than combining several loosely related strategies.
+
+Explain, where relevant:
+
+- what the idea is
+- why it matters
+- what people commonly misunderstand or miss
+- what mechanism is actually operating
+- why the common approach fails or produces weaker results
+- what changes when the reader understands the mechanism
+- how the reader can apply it
+
+Move quickly beyond the obvious premise and into the deeper mechanism.
+
+Do not turn the content into a collection of loosely connected tips.
+
+
+HOW-TO EXECUTION REQUIREMENT
+
+If the content idea is how-to in nature, this requirement is mandatory.
+
+Do not merely create a how-to-sounding title or explain why a method works.
+
+Teach the actual execution of the process.
+
+Make the practical sequence clear enough that the intended reader could perform the process after reading the content.
+
+Where relevant, clearly establish:
+
+- what the reader starts with
+- what they should do first
+- what they should do next
+- what they should look for at each stage
+- what information or input they need
+- what decision they should make at important decision points
+- what to do when the result is unclear
+- what a useful or correct outcome should look like
+- how to check whether the process worked
+
+Do not replace the practical process with general advice, principles, explanations, motivation, or vague recommendations.
+
+The reader should finish knowing not only:
+
+"Why does this work?"
+
+but also:
+
+"How do I actually do this?"
+
+If the process contains meaningful variations, choices, or exceptions, explain only the ones that materially affect execution.
+
+Do not artificially force a numbered step-by-step structure if the idea is better taught through demonstration, diagnosis, comparison, or another natural sequence.
+
+However, the underlying actions and decisions must remain clear.
+
+For non-how-to ideas, do not artificially manufacture a procedure merely to satisfy this requirement.
+
+
+AUTHORITY MECHANISM REQUIREMENT
+
+The finished content must leave the reader with at least one memorable thinking device they can reuse.
+
+This may be:
+
+- a useful distinction
+- a diagnostic
+- a decision rule
+- a test
+- a sequence
+- a comparison
+- a mental model
+- a named pattern
+- a simple framework
+
+Do not force fake proprietary branding, gimmicky acronyms, or artificial names.
+
+The mechanism should emerge naturally from the content.
+
+Develop it enough that the reader could actually use it after reading.
+
+For how-to content, distinguish between:
+
+1. the execution mechanism, which helps the reader perform the task
+2. the thinking mechanism, which helps the reader judge, diagnose, or decide better
+
+Use both when the idea naturally supports both.
+
+
+REPEATABLE INSIGHT REQUIREMENT
+
+Include at least one concise observation, rule, distinction, or conclusion strong enough that the reader could repeat it to someone else without needing the rest of the content.
+
+It should be:
+
+- useful
+- memorable
+- naturally worded
+- grounded in the actual idea
+
+Do not manufacture a motivational slogan or forced quotation merely to satisfy this requirement.
+
+
+EXAMPLE STANDARD
+
+Include at least one concrete, realistic example naturally woven into the teaching.
+
+Make the example specific to the actual niche, audience, offer, work, or situation whenever possible.
+
+Do not use the example merely to decorate the topic.
+
+Use it to demonstrate the idea through one or more of the following:
+
+- contrast
+- diagnosis
+- before-and-after reasoning
+- a decision being made
+- a process being performed
+- a mistake being identified
+- a consequence becoming visible
+- a better action being selected
+
+For how-to content, whenever practical, use the example to demonstrate the actual process rather than merely describing the process abstractly.
+
+Make the example detailed enough that the reader can see why one interpretation or action is better than another.
+
+The example should be useful enough to stand on its own inside social content, a newsletter, live teaching, or a workshop.
+
+
+EXPERT DEPTH
+
+Go at least one layer deeper than the obvious explanation.
+
+Surface useful details that basic content usually leaves unexplained.
+
+Include at least one insight, distinction, diagnostic, practical observation, shortcut, decision rule, mechanism, or example strong enough to change how the intended reader sees the topic.
+
+When making a broad claim, sharpen it into:
+
+- conditions
+- signals
+- tradeoffs
+- exceptions
+- practical tests
+- decision points
+
+Avoid pretending that a useful principle is universal when its usefulness depends on context.
+
+
+ANTI-ARTICLE RULE
+
+Do not spend most of the content restating the premise in increasingly polished language.
+
+Every paragraph must earn its place by doing at least one of the following:
+
+- deepening the mechanism
+- sharpening a distinction
+- demonstrating the idea
+- showing the process
+- diagnosing a situation
+- revealing a consequence
+- explaining a decision
+- making the idea more usable
+- showing what to do differently
+
+Reduce connective filler such as repeatedly announcing that something is important.
+
+Prefer:
+
+- direct claims
+- contrasts
+- diagnostic questions
+- specific behavior
+- practical reasoning
+- concrete examples
+- observable consequences
+
+Do not add paragraphs merely to reach the word count.
+
+
+INVISIBLE TEACHING SEQUENCE
+
+Without using these as mechanical headings, make the content naturally perform these teaching jobs where appropriate:
+
+1. Surface the common assumption, mistake, or current behavior.
+2. Reveal the more useful truth.
+3. Explain the underlying mechanism.
+4. Establish a memorable distinction or thinking device.
+5. Demonstrate the mechanism with a niche-specific example.
+6. Turn the idea into a diagnostic, test, or practical application.
+7. For how-to ideas, demonstrate the actual execution process.
+8. End with a clear decision rule, question, test, or next action.
+
+Do not force this exact sequence when the content idea naturally requires a different order.
+
+Preserve the strategic meaning of the original content idea while still delivering depth and usability.
+
+
+HOW-TO DEPTH TEST
+
+For how-to content, silently test the finished draft with this question:
+
+"Could the intended reader actually perform the task after reading this?"
+
+If the answer is no, the content is not finished.
+
+Deepen the execution until the reader can identify:
+
+- the starting point
+- the important actions
+- the meaningful decisions
+- the practical checks
+- the expected result
+
+Do not assume that saying "step by step" or using numbered steps automatically makes content actionable.
+
+Actionability comes from clear decisions, actions, inputs, outputs, and observable results.
+
+
+FORWARD-PULL STANDARD
+
+When it fits naturally, let the final 1 to 3 sentences create a subtle sense of unfinished discovery by revealing:
+
+- an adjacent implication
+- an unresolved consequence
+- a related opportunity
+- a next-level observation
+
+Do not use artificial cliffhangers, teaser language, hype, or references to "the next lesson."
+
+The pull must come from the idea itself.
+
+The content must still feel complete and satisfying on its own.
+
+
+WRITING STYLE
+
+Write like a sharp human expert teaching privately.
+
+Use contractions naturally throughout.
+
+Keep the language clear and easy to read while preserving expert-level thinking.
+
+Keep most paragraphs short, but let related thoughts stay together.
+
+Vary sentence length naturally.
+
+Avoid:
+
+- canned AI phrases
+- academic filler
+- fake profundity
+- generic hype
+- repetitive summaries
+- excessive bullets
+- predictable transition phrases
+- overexplaining what you are about to explain
+- artificial authority language
+
+Never use em dashes.
+
+Prefer clear, confident, human language.
+
+
+STRUCTURE
+
+Use the exact content idea title as the heading.
+
+Do not change the title.
+
+After the title, let the teaching flow naturally.
+
+Use no more than two subheadings unless a third is genuinely necessary for clarity.
+
+Do not label the internal teaching jobs mechanically.
+
+For how-to content, use numbered steps only when they genuinely improve the reader's ability to perform the process.
+
+Do not force every article into a rigid step-by-step format.
+
+End on the strongest usable rule, test, question, or next action rather than a generic recap.
+
+
+TRUTHFULNESS
+
+Do not invent:
+
+- research
+- studies
+- statistics
+- laws
+- quotations
+- case studies
+- credentials
+- universal claims
+- results
+- testimonials
+- proof
+
+Keep factual statements appropriately bounded.
+
+When an example is illustrative rather than factual, make it clear through natural wording that it is an example.
+
+
+WAY-OF-THINKING TEST
+
+This is the highest-priority quality standard.
+
+Before returning the content, silently ask:
+
+"Does this give the reader a distinctive, reusable way to think about this problem, or does it merely explain the topic well?"
+
+The desired reaction is:
+
+"This person has a way of thinking I want more of."
+
+If the content only explains the topic clearly, deepen the:
+
+- distinction
+- mechanism
+- diagnostic
+- decision rule
+- mental model
+- practical lens
+
+until the reader has a way of thinking they can carry into other situations.
+
+Do not manufacture novelty for its own sake.
+
+The thinking device must be genuinely useful, easy to understand, and supported by the content.
+
+
+AUTHORITY SIGNAL TEST
+
+The content should make the creator feel valuable because of how they interpret the topic, not because they sound confident or use impressive language.
+
+Favor:
+
+- sharp reasoning
+- useful distinctions
+- specific observations
+- practical judgment
+- meaningful examples
+- clear decision-making
+
+over declarations of expertise.
+
+If a paragraph sounds polished but does not reveal how to think, diagnose, decide, notice, or act better, strengthen or remove it.
+
+
+FINAL QUALITY CHECK
+
+Before responding, silently verify all of the following:
+
+- The body is at least 1,000 words.
+- The exact content idea has been preserved.
+- The content teaches one exact idea deeply.
+- The content does not drift into unrelated strategies.
+- The reader understands why the idea matters.
+- The underlying mechanism is clear.
+- The content contains a useful thinking device.
+- The content contains at least one repeatable insight.
+- The content contains at least one concrete, realistic example.
+- The example demonstrates the mechanism rather than merely mentioning the topic.
+- If the idea is how-to, the actual execution process is clear.
+- If the idea is how-to, the reader knows what to do, how to do it, and how to judge the result.
+- The content does not substitute explanation for execution.
+- The writing does not drift into generic article voice.
+- The creator's authority comes from reasoning rather than tone.
+- The content contains useful depth rather than word-count filler.
+- The final practical rule, test, question, or next action is clear.
+- No unsupported claims or invented evidence have been introduced.
+
+Fix any failure before returning the content.
+
+
+FINAL OUTPUT RULE
+
+Do not create the matching AI prompt yet.
+
+Do not mention this workflow or these instructions.
+
+Do not explain your reasoning.
+
+Do not summarize what you created.
+
+Do not add notes before or after the content.
+
+Return only the finished authority content.</div>
+        
+        <div class="button-group">
+          <button class="btn copy-btn" onclick="copyText('p2', this)">
+            <span>Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied to Clipboard!</span>`;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
