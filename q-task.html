@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quora Networking Task Creator</title>
+  <link rel="icon" href="spm.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --accent-danger: #f43f5e;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: fixed linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .prompt-workflow {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .step-label {
+      font-weight: 800;
+      font-size: 0.8rem;
+      background: var(--accent-primary);
+      color: #020617;
+      padding: 5px 16px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 22px;
+      line-height: 1.6;
+      word-break: break-word;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .prompt-content::-webkit-scrollbar { width: 8px; }
+    .prompt-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+    .prompt-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+      text-decoration: none;
+      border: none;
+    }
+
+    .copy-btn {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #020617;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 40px;
+      width: 100%;
+      padding-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .step-card { padding: 22px; }
+      .prompt-content { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Quora Networking Task Creator</h1>
+    </header>
+
+    <div class="prompt-workflow">
+
+      <!-- Prompt #1 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-label">Prompt #1</span>
+        </div>
+        <div class="prompt-content" id="p1">Create a recurring Task named "Quora Networking" that runs daily at 09:00 AM India Standard Time (IST).
+
+PRIMARY OBJECTIVE
+
+Help me build a relevant professional network on Quora by discovering questions where I can contribute genuinely useful answers, demonstrate thoughtful expertise, understand my target audience, and build credibility through consistent participation.
+
+The purpose is not merely to find questions to answer. It is to identify meaningful opportunities to help people, participate in relevant discussions, understand audience needs, and gradually build relationships with people interested in my areas of work.
+
+RESEARCH INPUTS
+
+Primary Keyword:
+Creating and selling digital products
+
+Secondary Keywords:
+- AI tools for beginners
+- AI-assisted learning
+- Learning new skills
+- Digital product ideas
+- Digital product validation
+- Selling digital downloads
+- Practical AI applications
+
+Target Audience:
+Beginners, aspiring digital product creators, and people who want to use AI to learn skills or create useful digital products.
+
+Preferred Languages:
+English and Bengali.
+
+Research Schedule:
+Daily at 09:00 AM IST.
+
+Research Window:
+The previous 24 hours, calculated using India Standard Time.
+
+MY PROFESSIONAL POSITIONING
+
+I share practical insights on:
+- Creating and selling digital products.
+- Using AI tools effectively for practical work.
+- Learning new skills with AI assistance.
+- Understanding and applying useful learning methods.
+- Developing, evaluating, and validating digital product ideas.
+- Turning knowledge and ideas into useful digital products.
+
+My approach is practical, beginner-friendly, thoughtful, and focused on helping people understand concepts and apply them in real situations.
+
+Do not portray me as an established expert, successful entrepreneur, or industry authority unless verifiable information supports such a claim.
+
+TASK 1 — DISCOVER RELEVANT QUORA QUESTIONS
+
+Search Quora using multiple relevant search queries derived from the Primary Keyword and Secondary Keywords.
+
+Search for questions published within the previous 24 hours in either English or Bengali.
+
+Prioritize questions that:
+- Address a genuine problem, challenge, uncertainty, or learning need.
+- Seek practical guidance rather than superficial opinions.
+- Are closely related to my professional interests and target audience.
+- Offer an opportunity to provide a specific, thoughtful, and useful answer.
+- Reveal common beginner mistakes, misconceptions, unmet needs, or practical obstacles.
+- May help me understand what aspiring digital product creators and AI learners actually need.
+- Could lead to meaningful discussion through the quality of the contribution.
+
+Look for questions about both the creation and sale of digital products, as well as the skills, learning processes, AI applications, and validation methods that support those activities.
+
+Do not restrict the research to exact keyword matches. Use relevant variations, synonyms, natural-language queries, and related concepts.
+
+TASK 2 — IDENTIFY GENUINE NETWORKING OPPORTUNITIES
+
+Evaluate every selected question using the following criteria.
+
+1. Topical Relevance
+
+How closely does the question relate to my professional interests?
+
+2. Contribution Potential
+
+Can I provide useful reasoning, a practical explanation, a concrete example, a step-by-step approach, or a perspective that adds value beyond generic advice?
+
+3. Audience Relevance
+
+Does the question appear relevant to beginners, aspiring digital product creators, or people interested in learning and applying AI?
+
+Explain the evidence supporting your assessment. Do not infer the questioner's identity, financial circumstances, or intentions without evidence.
+
+4. Conversation Potential
+
+Could a thoughtful answer naturally encourage further discussion, clarification, or an exchange of ideas?
+
+5. Learning and Research Value
+
+What does the question reveal about the audience's problems, knowledge gaps, assumptions, or unmet needs?
+
+6. Future Content Value
+
+Could the question inspire a useful future answer, educational post, tutorial, learning resource, or digital product idea?
+
+TASK 3 — PRIORITIZE QUESTIONS
+
+Classify each question into one of three categories.
+
+PRIORITY 1 — STRONG CONTRIBUTION OPPORTUNITY
+
+Questions that closely match my interests and provide a clear opportunity to offer a specific, practical, and meaningful contribution.
+
+PRIORITY 2 — POTENTIAL CONTRIBUTION OPPORTUNITY
+
+Relevant questions that may support useful discussion or audience development, but offer a less direct or less distinctive contribution opportunity.
+
+PRIORITY 3 — AUDIENCE RESEARCH OPPORTUNITY
+
+Questions that provide useful insights into audience problems, misconceptions, learning needs, product ideas, or emerging challenges, even if they are not the best immediate answering opportunities.
+
+Explain the reason for every classification.
+
+Do not assign a high priority merely because a question is recent, popular, or has many followers or views.
+
+TASK 4 — REQUIRED INFORMATION FOR EACH QUESTION
+
+For every selected question, provide the following information.
+
+1. Question title, reproduced accurately.
+2. Direct URL to the original Quora question.
+3. Publication date and time, if verifiable.
+4. Language: English or Bengali.
+5. Relevant primary or secondary keyword.
+6. A concise summary of the question.
+7. The underlying problem, uncertainty, or information gap.
+8. Why the question is relevant to my networking objectives.
+9. Priority classification and the reason for that classification.
+10. A specific suggested answer angle.
+11. Two or three useful points, examples, explanations, or reasoning steps that I could contribute.
+12. Potential for meaningful discussion, with a brief explanation.
+13. Potential value for future content or digital product research.
+14. Answer status: apparently unanswered, already answered, or unable to verify.
+
+Do not write a complete answer to the question unless I explicitly request it in a separate instruction.
+
+Do not write, publish, or suggest comments or replies on my behalf. The purpose of this task is to discover and evaluate opportunities, not to interact with Quora automatically.
+
+TASK 5 — BALANCE ENGLISH AND BENGALI RESEARCH
+
+Search both English-language and Bengali-language questions.
+
+Do not assume that an equal number of relevant questions will be available in both languages.
+
+Include the most relevant verified opportunities regardless of language.
+
+If relevant Bengali questions are scarce, report the actual findings rather than including unrelated questions to achieve a language quota.
+
+Keep original question titles in their original languages.
+
+Write the research report in English, but include a concise Bengali translation or explanation of every selected question, its underlying problem, and its suggested answer angle so I can review the opportunities quickly.
+
+Use natural, clear Bengali appropriate for readers in West Bengal, India.
+
+Do not translate English question titles in a way that changes their meaning.
+
+TASK 6 — AUDIENCE INSIGHTS
+
+After reviewing the selected questions, identify:
+
+A. The three most important recurring audience problems or needs, if supported by the evidence.
+
+B. Common beginner misconceptions or knowledge gaps.
+
+C. Questions that suggest a need for clearer explanations, practical examples, or step-by-step guidance.
+
+D. Potential future content topics related to creating and selling digital products, AI tools, and learning methods.
+
+E. Potential digital product ideas suggested by recurring problems, without assuming that demand has been validated.
+
+F. Opportunities to build credibility by contributing original reasoning, useful examples, or practical guidance.
+
+G. Any meaningful differences between English-language and Bengali-language questions, but only when the available evidence supports the comparison.
+
+Distinguish observed facts from interpretations and hypotheses.
+
+Do not claim a recurring pattern or trend based on a single question.
+
+TASK 7 — RECOMMEND QUESTIONS TO ANSWER FIRST
+
+Select up to three questions from the verified results that offer the strongest opportunities for meaningful contribution.
+
+For each selected question, explain:
+
+- Why it deserves attention.
+- What specific value I could add.
+- How I could make the answer more useful than generic advice.
+- What practical example, reasoning, or step-by-step explanation I could include.
+- What evidence or knowledge I should verify before answering.
+- Whether the question is suitable for a concise answer or requires a more detailed explanation.
+
+Do not recommend a question solely because it appears popular.
+
+Do not draft the complete answer. Only provide the answer strategy and contribution outline.
+
+TASK 8 — URL VERIFICATION AND RESEARCH ACCURACY
+
+Accuracy is more important than the number of results.
+
+- Verify that each URL points directly to an existing original Quora question.
+- Never fabricate questions, URLs, publication dates, answer counts, engagement metrics, or other details.
+- Exclude questions whose original URLs cannot be verified.
+- Do not treat a search engine indexing date as a question's publication date.
+- Do not claim that a question was published within the previous 24 hours unless the publication time is supported by reliable evidence.
+- If the question exists but its publication date cannot be verified, place it in a separately labelled section called "Relevant Questions — Publication Date Unverified". Do not count it among the verified recent questions.
+- Do not assume that a question is unanswered simply because a search result does not show its answers.
+- Avoid duplicate questions, including questions that express substantially the same problem using different wording.
+- Prefer original Quora question pages over third-party summaries or search snippets.
+- If fewer than five relevant, verifiable recent questions are found, report only those found and state the actual count.
+- Never include irrelevant questions merely to meet a numerical target.
+- If Quora access, search coverage, publication-date verification, or other capabilities are limited, state the limitation clearly.
+- Do not describe the research as exhaustive unless that can be established.
+- Do not invent historical comparisons if previous reports are unavailable.
+
+TASK 9 — REPORT FORMAT
+
+Begin every report with:
+
+QUORA NETWORKING REPORT
+
+Report Date and Time: [DATE AND TIME IN IST]
+
+Research Window: [START DATE AND TIME] to [END DATE AND TIME] IST
+
+Primary Keyword: Creating and selling digital products
+
+Languages Searched: English and Bengali
+
+Verified Recent Questions: [ACTUAL COUNT]
+
+Relevant Questions with Unverified Publication Dates: [ACTUAL COUNT]
+
+Research Limitations: [NONE IDENTIFIED OR EXPLICIT LIMITATIONS]
+
+Organize the report into the following sections.
+
+SECTION A — PRIORITY 1: STRONG CONTRIBUTION OPPORTUNITIES
+
+List the strongest verified recent questions, with all required information and Bengali explanations.
+
+SECTION B — PRIORITY 2: POTENTIAL CONTRIBUTION OPPORTUNITIES
+
+List relevant questions that provide a reasonable opportunity to contribute.
+
+SECTION C — PRIORITY 3: AUDIENCE RESEARCH OPPORTUNITIES
+
+List relevant questions that are particularly useful for understanding audience needs or discovering future content and product opportunities.
+
+SECTION D — RELEVANT QUESTIONS WITH UNVERIFIED PUBLICATION DATES
+
+Include relevant questions only when their original pages can be verified but their publication dates cannot.
+
+Clearly distinguish these from verified recent questions.
+
+SECTION E — AUDIENCE INSIGHTS
+
+Summarize the most useful findings, recurring problems, learning needs, and potential content or product opportunities supported by the collected evidence.
+
+SECTION F — RECOMMENDED QUESTIONS TO ANSWER FIRST
+
+Select up to three questions and provide a concise contribution strategy for each.
+
+SECTION G — BENGALI EXECUTIVE SUMMARY
+
+Provide a concise Bengali summary covering:
+- The best networking opportunities.
+- The most important audience problems.
+- The recommended questions to answer first.
+- Useful future content or product research opportunities.
+- Important research limitations.
+
+TASK 10 — DAILY EXECUTION AND CONTINUITY
+
+Run the research daily at 09:00 AM IST, provided recurring Task scheduling and the necessary search capabilities are supported.
+
+Use the specified keywords, target audience, and language preferences for every run unless I explicitly change them.
+
+When previous reports are accessible, compare new findings with earlier reports to avoid unnecessary repetition and identify meaningful changes.
+
+Do not repeatedly report the same question unless there is a clear reason to revisit it. Explain that reason when applicable.
+
+If previous reports are unavailable, state that the historical comparison could not be performed.
+
+Do not automatically follow users, vote on answers, publish answers, post comments, send messages, or perform other account actions.
+
+FINAL EXECUTION INSTRUCTIONS
+
+Create the recurring Task directly if the platform supports Task creation.
+
+The Task must be named "Quora Networking" and scheduled daily for 09:00 AM India Standard Time.
+
+After attempting creation, confirm the result accurately.
+
+Only confirm successful creation, recurrence, execution time, timezone, and task instructions if the platform explicitly confirms them.
+
+If direct Task creation is unavailable, explain that limitation and provide the exact instructions needed to create the recurring Task manually.
+
+Never claim that the Task is active, scheduled, or successfully created unless that status has been confirmed.</div>
+        <button class="btn copy-btn" onclick="copyText('p1', this)">
+          <span>Copy Prompt #1</span>
+        </button>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied to Clipboard!</span>`;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
